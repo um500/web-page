@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Health Report Form</title>
+  <style>
+    .container {
+      width: 400px;
+      margin: 0 auto;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="file"] {
+      width: 100%;
+      padding: 10px;
+    }
+
+    .submit-btn {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .submit-btn:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <form id="healthReportForm" action="insert.php" method="POST" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div class="form-group">
+        <label for="age">Age:</label>
+        <input type="text" id="age" name="age" required>
+      </div>
+      <div class="form-group">
+        <label for="weight">Weight:</label>
+        <input type="text" id="weight" name="weight" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="report">Upload Health Report:</label>
+        <input type="file" id="report" name="report" accept=".pdf" required>
+      </div>
+      <div class="form-group">
+        <input type="submit" class="submit-btn" value="Submit">
+      </div>
+    </form>
+  </div>
+
+  <script>
+    // JavaScript code to handle form submission
+    document.getElementById('healthReportForm').addEventListener('submit', function (event) {
+      event.preventDefault(); // Prevent form submission
+
+      // Get form data
+      var form = document.getElementById('healthReportForm');
+      var formData = new FormData(form);
+
+      // Make an AJAX request to submit the form data
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', form.action, true);
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          alert(xhr.responseText); // Display the response message
+          form.reset(); // Reset the form
+        }
+      };
+      xhr.send(formData);
+    });
+  </script>
+</body>
+</html>
